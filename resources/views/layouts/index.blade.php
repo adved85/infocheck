@@ -3,7 +3,7 @@
         <title>{{__('text.info_')}}</title>
         @include('../includes.links' )
       </head>
-    <body class="stretched device-xl back_fixed no-transition" style="overflow:auto">
+    <body class="stretched device-xl back_fixed no-transition">
         <div id="loading"><h1></h1></div>
         <div id="loaded" class="animate-bottom">
             @include('../includes.main_menu' )

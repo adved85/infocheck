@@ -250,17 +250,17 @@ a.ff:hover {
 }
 
 
-/* select#drop-lang::-ms-expand {
+select#drop-lang::-ms-expand {
     display: none;
-} */
+}
 
 select#drop-lang {
-    /* -webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
-    text-overflow: ''; */
+    text-overflow: '';
     /* padding:2px 4px; */
     /* border:none; */
-    padding: 1px 0px 1px 12px;
+    /* padding: 1px 0px 1px 12px; */
     outline:none;
     color: #d5dedf;
     background-color: #0f1841;
@@ -272,6 +272,8 @@ select#drop-lang {
     text-align: center;
     -ms-text-align-last: center;
     -moz-text-align-last: center;
+
+    background-image: url('http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png');
 }
 
 select#drop-lang > option {
@@ -286,7 +288,85 @@ select#drop-lang > option.drop-lang-selected {
 /* դրոփ մենյուի համար End */
 
 
+/* boot dropdown-lng START*/
+#dropdown-lang-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #c8c8c8;
+    min-width: 70px;
+    border: none;
+    border-radius: 3px;
+    background-color: #3a4161;
+    z-index: 121;
+    padding-top: 3px;
+}
+
+.dropdown-lng .dropdown-menu {
+    padding: unset;
+    left: 0px!important;
+    width: 70px;
+    min-width: 70px;
+    text-align: center;
+    margin: .3rem 0 0;
+}
+
+.dropdown-lng .dropdown-menu .dropdown-item {
+    padding: .25rem .5rem;
+}
+
+.dropdown-lng .dropdown-menu .dropdown-item:active,
+.dropdown-lng .dropdown-menu .dropdown-item.active {
+    background-color: #404b6fb8;
+    cursor: default;
+}
+
+
+/* boot dropdown-lng END*/
+
+
+/* morelines Start */
+.entry-title_wrapper {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    max-width: none !important;
+    width: 100%;
+}
+
+.entry-title {
+    width: 100%;
+    position: relative;
+    line-height: 18px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.entry-titlesection_button {
+    display: none;
+}
+
+.entry-titlesection_ellipsis::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 18px;
+    background: linear-gradient(to right, rgba(242, 242, 242, 0.2), rgba(242, 242, 242, 1) 100%);
+}
+/* morelines END */
+
+
 @media (max-width: 991.98px) {
+
+    #dropdown-lang-btn {
+        right: 40px;
+    }
+
+
+
     .drop-lang-wrap {
         right: -5px;
         top: -61px;
@@ -360,6 +440,11 @@ select#drop-lang > option.drop-lang-selected {
 }
 
 @media (max-width: 390px) {
+
+    #dropdown-lang-btn {
+        right: 27px;
+    }
+
     #top-bar {
         transform: translateX(-63%);
     }

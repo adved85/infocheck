@@ -235,7 +235,7 @@
                             </ol>
                     </div>
 
-                    <div class="drop-lang-wrap" style="display:block">
+                    <div class="drop-lang-wrap" style="display:none">
                         <select name="drop-lang" id="drop-lang" onchange="location = this.value;">
 
                             @foreach ($data['lng'] as $item)
@@ -283,7 +283,65 @@
                         </select>
                     </div>
 
+
+
             </nav>
+            <div class="dropdown-lng" style="">
+                <button class="dropdown-toggle" type="button" id="dropdown-lang-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="this.blur();">
+                  lang
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdown-lang-btn">
+                    @foreach ($data['lng'] as $item)
+
+
+                    <a class="dropdown-item @if (app()->getLocale() === $item['lng']) active active-lang @endif"
+
+                            @if (Route::current()->getName() !== 'register' && Route::current()->getName() !== 'login' &&
+                                Route::current()->getName() !== 'faqs' && Route::current()->getName() !== 'index_page' &&
+                                Route::current()->getName() !== 'about_us')
+                                @switch($data['call'])
+                                @case('archieve')
+
+                                    href = {{route(\Illuminate\Support\Facades\Route::currentRouteName(), ['locale'=>$item['lng'],'date' => $data['date']]) }}
+                                    @break
+                                @case('single')
+
+
+                                    href = {{route(\Illuminate\Support\Facades\Route::currentRouteName(), ['locale'=>$item['lng'],'unique_id' => $data['unique_id'],'title' => $data['title'] ]) }}
+                                    @break
+                                @case('tags')
+
+                                    href = {{url('/')}}
+                                    @break
+                                @case('search')
+
+                                    href = {{url('/')}}
+                                    @break
+                                @case('404')
+
+                                    href = {{url('/')}}
+                                    @break
+                                @default
+                                href = {{route(\Illuminate\Support\Facades\Route::currentRouteName(), ['locale'=>$item['lng'],'category_item_id' => $data['item_id'] ]) }}
+                                @endswitch
+
+                            @else
+                                href = {{route(\Illuminate\Support\Facades\Route::currentRouteName(), ['locale'=>$item['lng']])}}
+                            @endif
+
+                        title={{$item['lng_name']}}>
+                        {{ $item['lng_root'] }}
+                    </a>
+                    @endforeach
+                </div>
+                <script>
+                    let langToggler = document.getElementById('dropdown-lang-btn');
+                    langToggler.textContent = document.getElementsByClassName('active-lang')[0].textContent.trim();
+
+
+                </script>
+              </div><!-- END dropdown-lang -->
+
             </div>
 
             </div>

@@ -25,6 +25,7 @@
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5cf2d7807feea60012093f9e&product=social-ab' async='async'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js" type="text/javascript" charset="utf-8"></script>
 
+<script src="/js/jquery.morelines.min.js"></script>
 
 <script src="/js/lightbox.js"></script>
 {!!  $data['event']->script() !!}
@@ -33,7 +34,7 @@
 
     window.onload = function() {
         loading.style.display = 'none'
-        document.body.style.overflow = 'scroll'
+        document.body.style.overflowY = 'auto'
         // loaded.style.visibility = 'visible'
         // loaded.style.display = 'block'
         // header.style.display = 'block'
@@ -49,8 +50,27 @@
 
 
 
+    $(function() {
+      $('#post-list-footer .entry-title').moreLines({
+        linecount: 2,
+        baseclass: 'entry-title',
+        // basejsclass: 'js-text',
+        // classspecific: '_rm',
+        buttontxtmore: "read more",
+        buttontxtless: "read less",
+        animationspeed: 250
+      });
 
+      $('#post-list-footer1 .entry-title').moreLines({
+        linecount: 2,
+        baseclass: 'entry-title',
+        // basejsclass: 'js-text',
+        // classspecific: '_rm',
+        buttontxtmore: "read more",
+        buttontxtless: "read less",
+        animationspeed: 250
+      });
 
-
+    });
 </script>
 
