@@ -39,3 +39,13 @@ body h3,
     font-size: 20px;
     color: black!important;
 }
+
+.class-A .entry-title h3,
+.class-C .fbox-desc h3 {
+    font-size: 16px;
+}
+
+.class-D .fbox-desc h3,
+.class-B  .entry-title h3 {
+    font-size: 18px;
+}

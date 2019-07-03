@@ -28,5 +28,15 @@ body p,
 }
 
 body h3 {
-    font-size: 20px !important;
+    font-size: 18px !important;
+}
+
+li[id*='poster-quinta-small'] h5 {
+    font-size: 16px;
+}
+
+.class-C .fbox-desc h3,
+.class-B .entry-title h3,
+.class-D .fbox-desc h3 {
+    font-size: 18px !important;
 }

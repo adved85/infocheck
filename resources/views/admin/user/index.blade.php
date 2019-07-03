@@ -53,7 +53,7 @@
                                 @if ($user->roles[0]['name'] !== 'i_admin')
                                     <strong>User</strong>
                                 @else
-                                <strong class="border border-primary px-2 py-1"><i class="fas fa-users-cog"></i> Admin</strong>
+                                <strong class="border border-primary px-2 py-1" style="display:block"><i class="fas fa-users-cog"></i> Admin</strong>
                                 @endif
                                 {{-- @dump($user->roles[0]['name']) --}}
                             </td>

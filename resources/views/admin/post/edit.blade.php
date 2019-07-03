@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="form-group row">
-                        <label for="edit-post-title" class="col-sm-2 col-form-label col-form-label-lg text-left">Unique</label>
+                        <label for="edit-post-title" class="col-sm-2 col-form-label col-form-label-lg text-left">Title</label>
                         <div class="col-sm-10">
                             <input type="text" name="title" id="edit-post-title" class="form-control" value="{{$post->title}}">
                         </div>

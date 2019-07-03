@@ -12,6 +12,8 @@ use App\Role;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Session;
+
 class RegisterController extends Controller
 {
     /*
@@ -36,6 +38,7 @@ class RegisterController extends Controller
 
 
     public function redirectTo() {
+        Session::flash('subscribeResponse',['success' => __('register.regsuccess')]);
         return app()->getLocale() . '/';
     }
 

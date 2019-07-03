@@ -158,7 +158,12 @@ li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
     }
 
     #poster-quarta-big div.main_four {
-        height: 30rem;
+        /* height: 32rem; */
+        height: 100%;
+    }
+
+    #poster-quarta-small-3 {
+        margin: 0;
     }
 
     #main_poster div[id*='poster-quarta-small'] div.back {

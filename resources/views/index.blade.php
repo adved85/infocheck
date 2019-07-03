@@ -33,7 +33,10 @@
                                     <div class="text-overlay pl-4 pr-4 pb-2 hov-hi ">
                                         <div class="entry-c">
                                             <div class="entry-title">
-                                                <h3 class="t600 mb-2" style="color:#fff"><a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!!str_limit($item->short_text , 30)!!}</a></h3>
+                                                <h3 class="t600 mb-2" style="color:#fff">
+                                                    {{-- <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!!str_limit($item->short_text , 30)!!}</a> --}}
+                                                    <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!! $item->title !!}</a>
+                                                </h3>
                                                 <ul class="entry-meta_omg clearfix">
                                                     <li><i class="icon-calendar3"></i> {{ $item->date }}</li>
                                                 </ul>
@@ -58,7 +61,10 @@
                                 <div class="text-overlay pl-4 pr-4 pb-2 hov-hi">
                                         <div class="entry-c">
                                                 <div class="entry-title">
-                                                <h3 class="t600 mb-2"><a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}"  class="text-light">{!!str_limit($item->short_text , 80)!!}</a></h3>
+                                                <h3 class="t600 mb-2">
+                                                    {{-- <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}"  class="text-light">{!!str_limit($item->short_text , 80)!!}</a> --}}
+                                                    <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}"  class="text-light">{!! $item->title !!}</a>
+                                                </h3>
                                                 <ul class="entry-meta_omg clearfix">
                                                     <li><i class="icon-calendar3"></i> {{ $item->date }}</li>
                                                 </ul>
@@ -99,7 +105,9 @@
                                             <div class="entry-c">
                                                 <div class="entry-title">
                                                     <h3 class="t600 mb-2">
-                                                        <a  href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!!str_limit($item->short_text , 30)!!}</a></h3>
+                                                        {{-- <a  href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!!str_limit($item->short_text , 30)!!}</a> --}}
+                                                        <a  href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" class="text-light">{!! $item->title !!}</a>
+                                                    </h3>
                                                     <ul class="entry-meta_omg clearfix">
                                                         <li><i class="icon-calendar3"></i> {{ $item->date }}</li>
                                                     </ul>
@@ -140,7 +148,7 @@
                                 <div class="fbox-desc">
                                     <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}" >
                                         <h3>{{$item->title}}</h3>
-                                    <p>{!!str_limit($item->short_text , 50)!!} </p>
+                                    {{-- <p>{!!str_limit($item->short_text , 50)!!} </p> --}}
                                     </a>
                                     <ul class="entry-meta clearfix">
                                         <li><i class="icon-calendar3"> </i> {{ $item->date }}</li>
@@ -180,7 +188,7 @@
                                     <div class="fbox-desc">
                                         <a href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}">
                                             <h3>{{$item->title}}</h3>
-                                            <p>{!!str_limit($item->short_text , 50)!!} </p>
+                                            {{-- <p>{!!str_limit($item->short_text , 50)!!} </p> --}}
                                         </a>
                                         <ul class="entry-meta clearfix">
                                             <li><i class="icon-calendar3"> </i> {{ $item->date }}</li>
@@ -217,7 +225,8 @@
         <div class="entry-c">
             <div class="entry-title">
                 <h3 class="t600 mb-2">
-                    <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}" class="text-light">{!!str_limit($data['big_post']['title'] , 50)!!}</a></h3>
+                    {{-- <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}" class="text-light">{!!str_limit($data['big_post']['title'] , 50)!!}</a></h3> --}}
+                    <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}" class="text-light">{!! $data['big_post']['title'] !!}</a></h3>
                 <ul class="entry-meta_omg clearfix">
                     <li><i class="icon-calendar3"></i> {{$data['big_post']['date']}}</li>
                 </ul>
@@ -255,9 +264,12 @@
                             </a>
                     </div>
                 </div>
-                <div class="col_half bottommargin-sm col_last hov-hi" style="margin-bottom: 0">
+                <div class="col_half  col_last hov-hi" style="margin-bottom: 0"> <!-- bottommargin-sm -->
                     <div class="entry-title">
-                    <h3><a href="{{url(app()->getLocale().'/posts/'.$data['small_post'][$i]->unique_id.'/'.urlencode($data['small_post'][$i]->title))}}">{!!str_limit($data['small_post'][$i]->title, 50)!!}</a></h3>
+                    <h3>
+                        {{-- <a href="{{url(app()->getLocale().'/posts/'.$data['small_post'][$i]->unique_id.'/'.urlencode($data['small_post'][$i]->title))}}">{!!str_limit($data['small_post'][$i]->title, 50)!!}</a> --}}
+                        <a href="{{url(app()->getLocale().'/posts/'.$data['small_post'][$i]->unique_id.'/'.urlencode($data['small_post'][$i]->title))}}">{!! $data['small_post'][$i]->title !!}</a>
+                    </h3>
                     </div>
                     <ul class="entry-meta clearfix">
                         <li><i class="icon-calendar3"></i> {{$data['small_post'][$i]->date}}</li>
@@ -294,7 +306,9 @@
                 <div class="entry-c">
                        <div class="entry-title">
                         <h3 class="t600 mb-2">
-                            <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}"class="text-light"> {!!str_limit($data['big_post']['title'] , 50)!!}</a></h3>
+                            {{-- <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}"class="text-light"> {!!str_limit($data['big_post']['title'] , 50)!!}</a> --}}
+                            <a href="{{url(app()->getLocale().'/posts/'.$data['big_post']['unique_id'].'/'.urlencode($data['big_post']['title']))}}"class="text-light"> {!! $data['big_post']['title'] !!}</a>
+                        </h3>
                         <ul class="entry-meta_omg clearfix">
                             <li><i class="icon-calendar3"></i> {{$data['big_post']['date']}}</li>
                         </ul>
@@ -327,7 +341,8 @@
                                 <div class="entry-c">
                                     <div class="entry-title">
                                             <a href="{{url(app()->getLocale().'/posts/'.$data['small_post'][$i]->unique_id.'/'.urlencode($data['small_post'][$i]->title))}}" >
-                                                <h5 class="t700 mb-2">{!!str_limit($data['small_post'][$i]->title, 50)!!}</h5>
+                                                {{-- <h5 class="t700 mb-2">{!!str_limit($data['small_post'][$i]->title, 50)!!}</h5> --}}
+                                                <h5 class="t700 mb-2">{!! $data['small_post'][$i]->title !!}</h5>
                                             </a>
                                         <ul class="entry-meta_omg clearfix">
                                             <li><i class="icon-calendar3"></i> {{$data['small_post'][$i]->date}} </li>
