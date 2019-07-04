@@ -35,8 +35,13 @@ li[id*='poster-quinta-small'] h5 {
     font-size: 16px;
 }
 
+
+.class-A .entry-title h3,
 .class-C .fbox-desc h3,
 .class-B .entry-title h3,
-.class-D .fbox-desc h3 {
-    font-size: 18px !important;
+.class-D .fbox-desc h3,
+#current-category .fbox-desc h3,
+#main_poster .entry-title h3,
+#main_poster .entry-title h5 {
+    font-size: 16px !important;
 }

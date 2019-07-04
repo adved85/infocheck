@@ -27,7 +27,7 @@
             <div class="fbox-desc">
               <a   href="{{url(app()->getLocale().'/posts/'.$item->unique_id.'/'.urlencode($item->title))}}">
                 <h3>{{$item->title}}</h3>
-                <p>{!!str_limit($item->short_text , 50)!!} </p>
+                {{-- <p>{!!str_limit($item->short_text , 50)!!} </p> --}}
               </a>
                 <ul class="entry-meta clearfix">
                     <li><i class="icon-calendar3"> </i> {{ trueFormat($item->date) }}</li>

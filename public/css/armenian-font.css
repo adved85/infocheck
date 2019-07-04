@@ -36,16 +36,19 @@ body p,
 
 body h3,
 .feature-box h3 {
-    font-size: 20px;
+    font-size: 18px;
     color: black!important;
 }
 
 .class-A .entry-title h3,
-.class-C .fbox-desc h3 {
+.class-C .fbox-desc h3,
+#current-category .fbox-desc h3 {
     font-size: 16px;
 }
 
 .class-D .fbox-desc h3,
-.class-B  .entry-title h3 {
-    font-size: 18px;
+.class-B  .entry-title h3,
+#main_poster .entry-title h3,
+#main_poster .entry-title h5 {
+    font-size: 16px;
 }

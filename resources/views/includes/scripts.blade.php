@@ -44,7 +44,7 @@
         /* hide last divider of large-lang-menu */
         let largeLangMenu = document.getElementsByClassName('large-lang-menu')[0];
         let spanDividers = largeLangMenu.getElementsByClassName('lang-divider');
-        let lastDivider = spanDividers[spanDividers.length - 1].style.display = 'none';
+        // let lastDivider = spanDividers[spanDividers.length - 1].style.display = 'none';
     }
 
 
