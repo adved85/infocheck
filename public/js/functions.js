@@ -5,6 +5,7 @@ var wow = new WOW({
     mobile: false,
     live: true
 });
+var $hlinks = $('nav.greedy .hidden-links');
 $(window).imagesLoaded(function () {
     wow.init();
 });
@@ -404,8 +405,8 @@ var SEMICOLON = SEMICOLON || {};
             })
         }, stickFooterOnSmall: function () {
             $footer.css({"margin-top": ""});
-            var e = $window.height(), t = $wrapper.height();
-            !$body.hasClass("sticky-footer") && $footer.length > 0 && $wrapper.has("#footer") && e > t && $footer.css({"margin-top": e - t})
+            var e = $window.height(), t = $wrapper.height();//e - t
+            !$body.hasClass("sticky-footer") && $footer.length > 0 && $wrapper.has("#footer") && e > t && $footer.css({"margin-top": '0'})
         }, stickyFooter: function () {
             if ($body.hasClass("sticky-footer") && $footer.length > 0 && ($body.hasClass("device-xl") || $body.hasClass("device-lg"))) {
                 var e = $footer.outerHeight();
@@ -539,14 +540,17 @@ var SEMICOLON = SEMICOLON || {};
             }), $body.hasClass("device-xs") && ($topSocialEl.hide(), $topSocialEl.slice(0, 8).show())))
         }, topsearch: function () {
             $(document).on("click", function (e) {
+
                 $(e.target).closest("#top-search").length || $body.toggleClass("top-search-open", !1), $(e.target).closest("#top-cart").length || $topCart.toggleClass("top-cart-open", !1), $(e.target).closest("#page-menu").length || $pagemenu.toggleClass("pagemenu-active", !1), $(e.target).closest("#side-panel").length || $body.toggleClass("side-panel-open", !1), $(e.target).closest("#primary-menu").length || $("#primary-menu.on-click > ul").find(".d-block").removeClass("d-block"), $(e.target).closest("#primary-menu.mobile-menu-off-canvas > ul").length || $("#primary-menu.mobile-menu-off-canvas > ul").toggleClass("d-block", !1), $(e.target).closest("#primary-menu.mobile-menu-off-canvas > div > ul").length || $("#primary-menu.mobile-menu-off-canvas > div > ul").toggleClass("d-block", !1)
             }), $("#top-search-trigger").off("click").on("click", function (e) {
+
+                $hlinks.addClass('hidden');
                 $body.toggleClass("top-search-open"), $topCart.toggleClass("top-cart-open", !1), $("#primary-menu > ul, #primary-menu > div > ul").toggleClass("d-block", !1), $pagemenu.toggleClass("pagemenu-active", !1), $body.hasClass("top-search-open") && $topSearch.find("input").focus(), e.stopPropagation(), e.preventDefault()
             })
         }, topcart: function () {
-            $("#top-cart-trigger").off("click").on("click", function (e) {
-                $pagemenu.toggleClass("pagemenu-active", !1), $topCart.toggleClass("top-cart-open"), e.stopPropagation(), e.preventDefault()
-            })
+            // $("#top-cart-trigger").off("click").on("click", function (e) {
+            //     $pagemenu.toggleClass("pagemenu-active", !1), $topCart.toggleClass("top-cart-open"), e.stopPropagation(), e.preventDefault()
+            // })
         }
     }, SEMICOLON.slider = {
         init: function () {
@@ -1447,10 +1451,10 @@ var SEMICOLON = SEMICOLON || {};
             SEMICOLON.header.stickyMenu(t), SEMICOLON.header.stickyPageMenu(a), $window.on("scroll", function () {
              if ($('#post-lists').offset() !== undefined){
                 if($(window).scrollTop()>150){
-                    $('#post-lists').offset().top > 200? $("#post-lists").css({top: "12vh"}):$("#post-lists").css({top:( $(window).scrollTop()*30)/100 + "px"})
+                    $('#post-lists').offset().top > 200? $("#post-lists").css({top: "14.5vh"}):$("#post-lists").css({top:( $(window).scrollTop()*30)/100 + "px"})
                 }
                 else{
-                    $("#post-lists").css({top: "30vh"})
+                    $("#post-lists").css({top: "22vh"})
                 }
             }
            SEMICOLON.initialize.goToTopScroll(), $("body.open-header.close-header-on-scroll").removeClass("side-header-open"), SEMICOLON.header.stickyMenu(t), SEMICOLON.header.stickyPageMenu(a), SEMICOLON.header.logo()
@@ -1521,3 +1525,8 @@ jQuery(document).one("ajaxComplete", function () {
         }, 2e3), s.preventDefault()
     })
 });
+// setInterval(function(){
+//     $("#q-quest").hover();
+//     console.log("aaa")
+// },1000)
+

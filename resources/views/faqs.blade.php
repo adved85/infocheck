@@ -37,13 +37,18 @@
         @if ($data['question'][$i]->question()->exists())
         <div class="comment-content clearfix">
                 <div class="comment-author"><a href="#" rel="external nofollow" class="url">Icheck</a><span><a href="#" title="Permalink to this comment">{{$data['question'][$i]['question']->created_at}}</a></span></div>
-                <p>{{$data['question'][$i]['question']->body}}</p>
-
-                </div>
+                <p>
+                    <i class="icon-reply1"></i>
+                    {{$data['question'][$i]['question']->body}}
+                </p>
+        </div>
         @else
         <div class="comment-content clearfix">
                 <div class="comment-author"><a href="#" rel="external nofollow" class="url">Icheck</a><span><a href="#" title="Permalink to this comment">{{$data['question'][$i]->created_at}}</a></span></div>
-                <p><a href='{{url(app()->getLocale().'/'.$data['question'][$i]->link)}}'>{{$data['question'][$i]['post']->title.'/'.$data['question'][$i]['post']->date}} </a></p>
+                <p><a href='{{config('app.url').'/'.$data['question'][$i]['lang']->lng.'/'.$data['question'][$i]->link}}'>
+                    <i class="icon-line-link"></i>
+                    {{$data['question'][$i]['post']->title.'/'.$data['question'][$i]['post']->date}}
+                </a></p>
 
                 </div>
         @endif
@@ -55,6 +60,9 @@
 </li>
 @endfor
 </ol>
+<div class="pagination-own">
+    {{$data['question']->links()}}
+             </div>
 @if (Auth::check())
 @if(Auth::user()->hasRole('i_user'))
  @if (Auth::user()->hasVerifiedEmail())
@@ -62,14 +70,16 @@
  <form id="add_comment" action="{{ route('leave.question',
  [  'locale'=> app()->getLocale()
 
- ] ) }}"  method="POST">
+ ] ) }}"  method="POST"   enctype="multipart/form-data">
            @csrf
    <input name='u_id' type='hidden' value='{{Auth::user()->id}}'/>
    <input type="text" name="folder_name" value="questions" hidden>
    <p> <textarea id ='textquest' name="textarea" class="required sm-form-control input-block-level short-textarea valid" required placeholder="{{trans('text.add_q')}}"></textarea></p>
+
+
    <div class="form-group">
    <label><span style="font-size: 11px">{{trans('text.zip')}}</span> </label>
-        <input type="file" class="form-control-file"   name="files[]" id="files" multiple>
+        <input type="file" class="form-control-file"   name="files[]" multiple>
 
         </div>
    @if ($message = Session::get('warning_comment'))
@@ -97,7 +107,10 @@
 <div class="clear"></div>
 
 
+
 </div>
+
          </div>
+
 
 @endsection

@@ -11,6 +11,13 @@ use App\Answer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
+use App\User;
+
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 class QuestionController extends Controller
 {
     /**
@@ -83,6 +90,9 @@ class QuestionController extends Controller
             $answer->delete();
         }
 
+        // logging action
+        Log::channel('info_daily')->info('Admin: Reset replied Question N-'.$q_id, ['type' => $type, 'type_id' => $type_id, 'id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
         return redirect()->route('admin.question.index', $locale)
         ->with('success', 'Replied '.$type.' № -'.$type_id.' was successfuly reset!');
     }
@@ -124,6 +134,32 @@ class QuestionController extends Controller
         $question->questionable_id = $post->id;
         $question->questionable_type = Post::class;
         $question->save();
+
+        $user = User::find($question->user_id);
+        $params = [];
+        $params['from_name'] = config('mail.from.name');
+        $params['from_email'] = config('mail.from.address');
+        $params['name'] = $user->name;
+        $params['email'] = $user->email;
+        $params['subject'] = 'A reply to Your Question';
+        $params['template_type'] = 'post_reply';
+        $params['template'] = 'admin.emails.send';
+
+        $body = '<h4>Dear '.$user->name.'!</h4>';
+        $body.='<p>We replied to your question.</p>';
+        $body.='<p><cite>"'.$question->body.'"</cite></p><hr>';
+        $body.='<p>Follow this link to see Your answer.</p>';
+        $body.='<a href="'.config('app.url').'/'.$locale.'/posts/'.$post->unique_id.'/'.urlencode($post->title).'" target="_blank">'.$post->title.'</a>';
+
+        $params['body'] = $body;
+        // return $params;
+
+
+        // return new MailNotify($params); // shows template //
+        Mail::to($user->email)->send(new MailNotify($params));
+
+        // action logging
+        Log::channel('info_daily')->info('Admin: Reply Question N-'.$quest_id.' by Post N-'.$post_id, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
 
         return redirect()->route('admin.question.index', $lng)
         ->with('success', 'Question №-'.$quest_id.' was successfully replied by Post №-'.$post_id);
@@ -180,6 +216,10 @@ class QuestionController extends Controller
         // $question->body = $request->body;
         $question->visible = $request->visible;
         $question->save();
+
+
+        // action logging
+        Log::channel('info_daily')->info('Admin: Update Question N-'.$id.' set visible='.$request->visible, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
 
         return redirect()->back()->with('success', 'Question № -'.$id.' was successfuly updated');
 

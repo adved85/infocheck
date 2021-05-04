@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /storage/
+Disallow: /fonts/
+Disallow: /php/
+Disallow: /js/
+Disallow: /css/
+Disallow: /vendor/

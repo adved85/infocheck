@@ -1,0 +1,249 @@
+
+
+/* START vertical lines of Category name */
+div[class*='cat-name'] .vert-line1 {
+    margin: 0 2px 0 15px;
+}
+
+div[class*='cat-name'] .vert-line2 {
+    margin: 0px 2px 0 2px;
+}
+
+div[class*='cat-name'] .vert-line3 {
+    margin: 0 4px 0 2px
+}
+/* END vertical lines of Category name */
+
+
+/* START Poster 1x3 - "quarta" DEFAULT */
+#poster-quarta-big {
+    margin-bottom: 1rem !important;
+}
+
+#poster-quarta-big div.main_four {
+    width: 100%;
+    height: 18rem;
+}
+
+#main_poster div[id*='poster-quarta-small'] div.back {
+    width: 100%;
+    height: 16rem!important;
+}
+/* END Poster 1x3 - "quarta" DEFAULT */
+
+
+
+
+/* START poster 1x4 - "quinta" default */
+#poster-quinta-big {
+    margin-bottom: 2rem !important;
+}
+
+#poster-quinta-big .back {
+    height: 18rem !important;
+}
+
+li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
+    height: 16rem !important;
+}
+/* START poster 1x4 - "quinta" default */
+
+
+
+
+/* START class-A - default */
+.class-A .class-A-small .entry,
+.class-A #class-A-big .entry {
+    height: 16rem !important;
+}
+/* END class-A - default */
+
+
+/* START class-B - defaults */
+.class-B .class-B-twins .entry {
+    height: 16rem !important;
+}
+/* END class-B - defaults */
+
+
+/* START class-C - default */
+.class-C .class-C-quarter .back {
+    height: 16rem !important;
+}
+/* END class-C - default */
+
+
+/* START class-D - default */
+.class-D .class-D-third .back {
+    height: 16rem !important;
+}
+/* END class-D - default */
+
+
+
+/* START category - post items */
+.cat-post-item .hov-hi-div.back {
+    height: 16rem !important;
+}
+/* END category - post items */
+
+
+@media (min-width: 469px) {
+    #poster-quinta-big {
+        margin-bottom: 0 !important;
+    }
+    #poster-quinta-big .back {
+        height: 20rem !important;
+    }
+    li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
+        height: 10rem !important;
+    }
+
+}
+
+
+
+
+
+@media (min-width: 480px) {
+    #poster-quarta-big div.main_four {
+        height: 24rem;
+    }
+
+    #main_poster div[id*='poster-quarta-small'] div.back {
+        height: 20rem!important;
+    }
+
+
+    .class-A .class-A-small .entry,
+    .class-A #class-A-big .entry {
+        height: 20rem !important;
+    }
+
+
+    .class-B .class-B-twins .entry {
+        height: 20rem !important;
+    }
+
+
+    .class-C .class-C-quarter .back {
+        height: 20rem !important;
+    }
+
+
+    .class-D .class-D-third .back {
+        height: 20rem !important;
+    }
+
+
+    #poster-quinta-big .back {
+        height: 22rem !important;
+    }
+    li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
+        height: 12rem !important;
+    }
+
+
+
+    .cat-post-item .hov-hi-div.back {
+        height: 20rem !important;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    #poster-quarta-big {
+        margin-bottom: 0 !important;
+    }
+
+    #poster-quarta-big div.main_four {
+        /* height: 32rem; */
+        height: 100%;
+    }
+
+    #poster-quarta-small-3 {
+        margin: 0;
+    }
+
+    #main_poster div[id*='poster-quarta-small'] div.back {
+        height: 15rem!important;
+    }
+
+
+    .class-A .class-A-small .entry {
+        height: 13rem !important;
+    }
+    .class-A #class-A-big .entry {
+        height: 26rem !important;
+    }
+
+
+    .class-B .class-B-twins .entry {
+        height: 28rem !important;
+    }
+
+    .class-C .class-C-quarter .back {
+        height: 28rem !important;
+    }
+
+
+    .class-D .class-D-third .back {
+        height: 28rem !important;
+    }
+
+
+
+    #poster-quinta-big .back {
+        height: 30rem !important;
+    }
+    li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
+        height: 15rem !important;
+    }
+
+
+
+    .cat-post-item .hov-hi-div.back {
+        height: 11rem !important;
+    }
+
+}
+
+
+
+@media (min-width: 991px) {
+    #main_poster div[id*='poster-quarta-small'] div.back {
+        height: 9rem!important;
+    }
+
+
+    .class-A .class-A-small .entry {
+        height: 15rem !important;
+    }
+    .class-A #class-A-big .entry {
+        height: 35rem !important;
+    }
+
+
+    .class-B .class-B-twins .entry {
+        height: 24rem !important;
+    }
+
+
+    .class-C .class-C-quarter .back {
+        height: 11rem !important;
+    }
+
+
+    .class-D .class-D-third .back {
+        height: 15rem !important;
+    }
+
+
+    #poster-quinta-big .back {
+        height: 23rem !important;
+    }
+    li[id*='poster-quinta-small'] .fbox-media .hov-hi-div.back {
+        height: 11.12rem !important;
+    }
+}

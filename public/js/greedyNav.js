@@ -2,8 +2,11 @@ $(function() {
 
   var $nav = $('nav.greedy');
   var $btn = $('nav.greedy button');
+  var $btn2 = $('.burger2');
   var $vlinks = $('nav.greedy .links');
   var $hlinks = $('nav.greedy .hidden-links');
+  var $hlinks2 = $('#header-wrap .hidden-links');
+  var $minus = 250;
 
   var numOfItems = 0;
   var totalSpace = 0;
@@ -20,8 +23,22 @@ $(function() {
 
   function check() {
 
+
+    if ($(window).width() < 753) {
+
+        $minus = 2500;
+
+    }else if($(window).width() < 992){
+        $minus = 100;
+    }
+    else {
+        $minus = 250;
+    }
+
+
+
     // Get instant state
-    availableSpace = $vlinks.width() - 10;
+    availableSpace = $vlinks.width() - $minus; /*defult  -10 */
     numOfVisibleItems = $vlinks.children().length;
     requiredSpace = breakWidths[numOfVisibleItems - 1];
 
@@ -51,6 +68,12 @@ $(function() {
     $hlinks.toggleClass('hidden');
   });
 
+  $btn2.on('click', function() {
+    $hlinks.toggleClass('hidden');
+  });
+
   check();
 
 });
+
+

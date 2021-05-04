@@ -1,19 +1,24 @@
 <html dir="ltr" lang="en-US">
     <head>
-        <title>InfoCheck</title>
-        @include('../includes.links_for_single_post')
-
-  <meta property="og:url"           content="{{url(app()->getLocale().'/posts/'.$data['post'][0]->unique_id.'/'.urlencode($data['post'][0]->title))}}" />
-  <meta property="og:type"          content="website" />
+        <title>{{__('text.info_')}}</title>
+        <meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@nytimesbits" />
+<meta name="twitter:creator" content="@nickbilton" />
+        <meta property="og:locale" content="en_US" />
+<meta property="og:locale։alternate" content="ru_RU" />
+<meta property="og:locale։alternate" content="hy_AM" />
+  <meta property="og:url"           content="{{ url()->full() }}" />
+  <meta property="og:type"          content="article" />
   <meta property="og:title"         content="{{$data['post'][0]->title}}" />
-  <meta property="og:description"   content="{!!str_limit($data['post'][0]->short_text, 80)!!}"/>
-  <meta property="og:image"         content="{{$data['post'][0]->img}}" />
-
+  <meta property="og:image"         content="{{asset( $data['post'][0]->img ) }}" />
+  <meta property="og:description"   content="{!!strip_tags( $data['post'][0]->short_text )!!}"/>
+        @include('../includes.links_for_single_post')
       </head>
-<body class="stretched device-xl no-transition">
+<body class="stretched device-xl no-transition back_fixed">
 
-
-        <script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=161407021204454&autoLogAppEvents=1"></script>
+  <script>
                 !function (d, id, did, st, title, description, image) {
                   var js = d.createElement("script");
                   js.src = "https://connect.ok.ru/connect.js";
@@ -27,15 +32,15 @@
                     }
                   }};
                   d.documentElement.appendChild(js);
-                }(document,"ok_shareWidget",document.URL,'{"sz":20,"st":"rounded","nc":1,"ck":2,"lang":"en"}',"THIS IS A STANDARD POST WITH A PREVIEW IMAGE","Integer posuere erat a ante venenatis dapibus posuere velit aliquet.","https://omegacoding.com/infocheck/images/services/1.jpg");
+                }(document,"ok_shareWidget",document.URL,'{"sz":20,"st":"rounded","nc":1,"ck":2,"lang":"en"}');
                 </script>
 
                 <script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
 
 
-                <div id="fb-root"></div>
-                <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: hy_AM</script>
-                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/hy_AM/sdk.js#xfbml=1&version=v3.3&appId=161407021204454&autoLogAppEvents=1"></script>
+                  <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: hy_AM</script>
+
+
                 <script>window.twttr = (function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0],
                     t = window.twttr || {};
@@ -52,52 +57,43 @@
 
                   return t;
                 }(document, "script", "twitter-wjs"));</script>
-
-
-
-
-
-
-            @include('../includes.mini_menu_for_posts' )
+<div id="loading"><h1></h1></div>
+<div id="loaded" class="animate-bottom">
+            {{-- @include('../includes.mini_menu_for_posts' ) --}}
             @include('../includes.main_menu' )
+            @include('../includes.mini_menu' )
+            @include('../includes.subscribe_response')
 
-<section id="content">
-    <div class="content-wrap">
-            <div class="container clearfix">
-                    <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url(app()->getLocale().'/post/'.urlencode($data['breadcrumb']->item_id))}}">{{$data['breadcrumb']->name}}</a></li>
+<section id="content"  class="gallery" data-lightbox>
+    <div class="container content-wrap">
+            <div class="container postcontent clearfix min">
+                    <ol class="breadcrumb own">
+                    <li class="breadcrumb-item breadcrumb-item-first"><a href="{{url(app()->getLocale().'/post/'.urlencode($data['breadcrumb']->item_id))}}">{{$data['breadcrumb']->name}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$data['post'][0]->title}}</li>
                     </ol>
+                    <div class="entry-title title-own" style="z-index:10">
+                        <h2>{{$data['post'][0]->title}}</h2>
+
+                        <ul class="entry-meta clearfix" style="margin-bottom: 0;">
+
+                        <li><a class="a-date" href="{{url( app()->getLocale().'/archieves/'.defaultFormat($data['post'][0]->date) ) }}" ><i class="icon-calendar3"></i> {{$data['post'][0]->date}} </a></li>
+                        </ul>
+
+                        </div>
             </div>
 
             {{-- {{dd($data['post'][0]['id'])}} --}}
 
-        <div class="container clearfix margin-top-25">
-
-
-
-
+        <div class="container clearfix">
             <div class="postcontent nobottommargin clearfix">
                 <div class="single-post nobottommargin">
                         <div class="entry clearfix">
-                                <div class="entry-title" style="position: absolute;top: 18px;">
-                                <h2>{{$data['post'][0]->title}}</h2>
-                                </div>
-                                <ul class="entry-meta clearfix">
-                                <li><i class="icon-calendar3"></i> {{$data['post'][0]->date}}</li>
-                                </ul>
                                 <div class="entry-image">
-                                <a href="#"><img src="{{$data['post'][0]->img}}" alt="Blog Single"></a>
-                                </div>
+                             <img src="{{$data['post'][0]->img}}" alt="Image"  title="{{$data['post'][0]->title}}" class="aa">
+                            </div>
                                 <div class="entry-content notopmargin">
-                                    <div>
-                                            {{$data['post'][0]->html_code}}
-
-                                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. <a href="#">Curabitur blandit tempus porttitor</a>. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper.</p>
-                                        <blockquote><p>Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.</p></blockquote>
-                                        <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus.</p>
-                                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. <a href="#">Nullam quis risus eget urna</a> mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-
+                                    <div class="entry-post-html">
+                                            {!!$data['post'][0]->html_code!!}
                                     </div>
                             <div class="tagcloud clearfix bottommargin">
                                     @isset($data['docs'])
@@ -124,40 +120,7 @@
                             @endisset
                                         <div class="clear"></div>
 
-                                        <div class="si-share noborder clearfix">
-                                        		<div>
-
-					<div style="float:left">
-				<script type="text/javascript"><!--
-				document.write(VK.Share.button(false,{type: "link", text: "Share", image: 'https://vk.com/images/icons/like_widget.png', style:'margin:12px'
-				}));
-				--></script>
-					</div>
-
-					<div  class="fb-share-button" data-layout="button" data-size="small">
-					<a target="_blank" href="#" class="fb-xfbml-parse-ignore">Share</a>
-					</div>
-
-					<div style="float:left">
-
-				    <script type="IN/Share" data-url="https://omegacoding.com/infocheck/posts_single.html"></script>
-					</div>
-
-
-					<div style="float:left">
-					<a class="twitter-share-button"
-						href="https://twitter.com/intent/tweet">
-					Tweet</a>
-					</div>
-
-
-					<div style="float:left">
-					<div id="ok_shareWidget"></div>
-					</div>
-
-
-					</div>
-                                        </div>
+                 <div class="sharethis-inline-share-buttons"></div>
                                         </div>
                                 </div>
                         </div>
@@ -204,12 +167,12 @@
                                           <input name='u_id' type='hidden' value='{{Auth::user()->id}}'/>
                                   <p> <textarea id ='textar' name="textarea" class="required sm-form-control input-block-level short-textarea valid" required placeholder="{{trans('text.add_c')}}"></textarea></p>
 
-                                  @if ($message = Session::get('warning_comment'))
+                                 {{-- @if ($message = Session::get('warning_comment'))
                                   <div class="alert alert-success alert-block fade show">
                                       <button type="button" class="close" data-dismiss="alert">×</button>
                                           <strong>{{ $message }}</strong>
                                   </div>
-                                  @endif
+                                  @endif--}}
                                   <button type='submit' class="btn btn-secondary">{{trans('text.leave_comment')}}</button>
                                 </form>
                                  @else
@@ -261,9 +224,11 @@
       <div class="modal-on-load" data-target="#myModal1"></div>
       <div class="modal1 mfp-hide" id="myModal1">
             <div class="block divcenter" style="background-color: #FFF; max-width: 400px;">
-            <div class="center" style="padding: 30px;">
-            <h3>{{ $message }}</h3>
-             </div>
+            <div class="center" style="padding: 30px 0 0;">
+                            <h3 style="margin: 0 0 15px;"> {{ $message }}</h3>
+                            <div style="font-size: 20px;">  {{trans('text.thanks')}} </div>
+            </div>
+
             <div class="section center nomargin" style="padding: 20px;">
             <a href="#" class=" btn btn-secondary" onClick="$.magnificPopup.close();return false;">{{trans('text.close')}}</a>
             </div>
@@ -272,26 +237,27 @@
 
       @endif
     </div>
-     </section>
 
+     </section>
+     <div id="pic" style="position: absolute;z-index: -1; display: none;"></div>
      <section id="page-title">
             @if (count($data['the_same_posts'])>0)
             <?php $limit=0; ?>
           <div class="container clearfix mt-5">
                       <h3 class="h3_omg">{{trans('text.same_posts')}}</h3>
-                      <div class="line line_omg"></div>
+                      <div class="line line_omg_post"></div>
                  @for ($i = 0; $i < count($data['the_same_posts']); $i++)
                      <?php $limit++; ?>
                      @if ($limit<=3)
-                     <div class="col_one_third nobottommargin">
-                             <div class="feature-box media-box">
+                     <div class="col_one_third nobottommargin hov">
+                             <div class="feature-box media-box hov-hi">
                                  <div class="fbox-media">
                         <a href="{{url(app()->getLocale().'/posts/'.$data['the_same_posts'][$i]->unique_id.'/'.urlencode($data['the_same_posts'][$i]->title))}}">
-                                     <img class="image_fade" id="{{$data['the_same_posts'][$i]->id}}" src="{{$data['the_same_posts'][$i]->img}}" alt="Image">
+                                     <img class="image_fade"  src="{{$data['the_same_posts'][$i]->img}}" alt="Image">
                         </a>
                                  </div>
                                  <div class="fbox-desc">
-                                        <a class="own-link-aa{{$data['the_same_posts'][$i]->id}}"  href="{{url(app()->getLocale().'/posts/'.$data['the_same_posts'][$i]->unique_id.'/'.urlencode($data['the_same_posts'][$i]->title))}}">
+                                        <a  href="{{url(app()->getLocale().'/posts/'.$data['the_same_posts'][$i]->unique_id.'/'.urlencode($data['the_same_posts'][$i]->title))}}">
                                                 <h3>{{$data['the_same_posts'][$i]->title}}</h3>
                                                 <p>{!!str_limit($data['the_same_posts'][$i]->short_text , 60)!!} </p>
                                               </a>
@@ -305,16 +271,36 @@
                  @endfor
           @endif
 
-
+        @include('../includes.right_side')
     </section>
+
      @include('../includes.footer')
     </div>
     <div id="gotoTop" class="icon-angle-up"></div>
   @include('../includes.scripts')
 
 <script>
-     $('#textar').val('');
+
+
+
+        $('#textar').val('');
 </script>
+@isset($data['pic'])
+<script>
+
+        var picter= {!! json_encode($data['pic']->toArray())!!}
+        if(picter){
+           // console.log(picter)
+        var pic_div=document.getElementById('pic');
+        for (var i=0; i<picter.length; i++){
+            pic_div.innerHTML+="<img class='aa' src="+picter[i]['pic_link']+" />"
+        }
+
+        }
+
+       </script>
+@endisset
+
 
 </body>
 </html>

@@ -80,7 +80,7 @@
                 @endforeach
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex" style="justify-content: center;">
                 <div class="card" style="width: 18rem;">
                     <img src="{{asset('/storage/postclasses/A.png')}}" class="card-img-top" alt="A.png">
                     <div class="card-body">
@@ -94,13 +94,13 @@
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
-                    <img src="{{asset('/storage/postclasses/C.png')}}" class="card-img-top" alt="C.png">
+                    <img src="{{asset('/storage/postclasses/D.png')}}" class="card-img-top" alt="C.png">
                     <div class="card-body">
                         <h4 class="card-text">class C</h4>
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
-                    <img src="{{asset('/storage/postclasses/D.png')}}" class="card-img-top" alt="D.png">
+                    <img src="{{asset('/storage/postclasses/C.png')}}" class="card-img-top" alt="D.png">
                     <div class="card-body">
                         <h4 class="card-text">class D</h4>
                     </div>

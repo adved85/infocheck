@@ -53,7 +53,7 @@
                                 @if ($user->roles[0]['name'] !== 'i_admin')
                                     <strong>User</strong>
                                 @else
-                                <strong class="border border-primary px-2 py-1"><i class="fas fa-users-cog"></i> Admin</strong>
+                                <strong class="border border-primary px-2 py-1" style="display:block"><i class="fas fa-users-cog"></i> Admin</strong>
                                 @endif
                                 {{-- @dump($user->roles[0]['name']) --}}
                             </td>
@@ -99,7 +99,9 @@
                                         <input type="text" name="status" value="1" hidden>
                                         <button class="btn btn-outline-info">Activate</button>
                                     @endif
-                                    <a href="" role="button" class="btn btn-outline-secondary"><i class="far fa-envelope"></i> Send Mail</a>
+                                    <a href="{{route('admin.email.compose',['locale'=>app()->getLocale(), $user->id])}}" role="button" class="btn btn-outline-secondary">
+                                        <i class="far fa-envelope"></i> Send Mail
+                                    </a>
                                 </div>
                             </form>
                             </td>
@@ -109,6 +111,13 @@
                     @endforelse
 
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            {{$users->links()}}
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

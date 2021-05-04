@@ -38,6 +38,7 @@ class Post extends Model
         return $posts = DB::table('categories')
         ->where('categories.name',$category_name)
         ->where('categories.lang_id',$lang_id)
+        ->where('posts.status','<>','unpublished')
         ->orderByRaw('date DESC')
         ->select('*')
         ->join('posts', 'categories.id', '=','posts.category_id' )
@@ -48,7 +49,7 @@ class Post extends Model
         return $posts = DB::table('posts')
         ->where('lang_id',$lang_id)
         ->where('date',$date)
-        ->where('status','=','published')
+        ->where('status','<>','unpublished')
         ->orderByRaw('id DESC')
         ->paginate(6);
     }
@@ -66,6 +67,28 @@ class Post extends Model
 
         $update = DB::update('update posts set view = view +1 where id = ?', [$post_id]);
                return $update;
+    }
+
+
+    public function pictures(Type $var = null)
+    {
+        return $this->hasMany('App\Lightbox', 'post_unique_id', 'unique_id');
+    }
+
+
+
+    public function getDateAttribute($dateSatring)
+    {
+        $date = date_create($dateSatring);
+        $newDate = date_format($date, 'd-m-Y');
+        return $newDate;
+    }
+
+    public function defaultFormat($dateSatring)
+    {
+        $date = date_create($dateSatring);
+        $oldDate = date_format($date, 'Y-m-d');
+        return $oldDate;
     }
 
 

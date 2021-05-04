@@ -14,7 +14,7 @@ class Category extends Model
 
 
     static  function get_category($lang_id){
-       return  $get_category = Category::where('lang_id',$lang_id)->orderBy('position')->get();
+       return  $get_category = Category::where('lang_id',$lang_id)->orderBy('position')->where('status',1)->get();
     }
     public function get_category_posts() {
         return $this->hasMany('App\Post', 'category_id', 'id');

@@ -71,7 +71,7 @@ class LoginController extends Controller
             return $this->sendBlockedLoginResponse($request);
         }
 
-        if ($request->user()->hasRole('i_admin')) {
+        if ($request->user() && $request->user()->hasRole('i_admin')) {
             // return redirect(url('/', app()->getLocale()));
             return redirect()->route('admin.index', app()->getLocale());
         }
@@ -139,6 +139,9 @@ class LoginController extends Controller
                'provider_id'   => $providerUser->getId(),
                'provider_name' => $provider,
            ]);
+
+            // logging action
+            Log::channel('info_daily')->info('User: New User has registrated by Provider->'.$provider, ['id'=> $user->id, 'email'=> $user->email]);
 
            return $user;
        }

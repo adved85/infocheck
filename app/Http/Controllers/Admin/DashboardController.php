@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Lang;
 use App\Poster;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 class DashboardController extends Controller
 {
     public function __construct()
@@ -17,6 +20,7 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request) {
+
         // return 'this is dashboar';
         $posters = Poster::all();
         return view('admin.index',[
@@ -51,6 +55,11 @@ class DashboardController extends Controller
           }
 
         //   dd($posters);
+
+
+        // logging action
+        Log::channel('info_daily')->info('Admin: Update Poster Type', ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
         return redirect()->back()->with('success', 'Poster type was successfuly updated');
     }
 }

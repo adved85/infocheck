@@ -16,7 +16,9 @@ class CreateLangsTable extends Migration
         Schema::create('langs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('lng',5);
-            $table->string('lng_name',50);
+            $table->string('lng_root',10);
+            $table->string('lng_name',191);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

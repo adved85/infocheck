@@ -1,0 +1,54 @@
+@font-face {
+    font-family: GHEAGrpalatReg;
+    src: url(/css/fonts/GHEAGrpalatReg.otf);
+}
+
+
+html, body,
+h1, h2, h3, h4, h5, h6,
+h4.own-h4,
+.font-primary,
+#logo,
+#primary-menu ul li > a,
+#primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column > li.mega-menu-title > a,
+#top-search form input ,
+.entry-link,
+.entry.entry-date-section span,
+.button.button-desc,
+ul.tab-nav-lg li a,
+.counter,
+label,
+.widget-filter-links li a,
+.nav-tree li a,
+.wedding-head .and, .wedding-head .first-name, .wedding-head .last-name
+
+{
+    font-family: GHEAGrpalatReg!important;
+    font-weight: 500!important;
+
+}
+
+body p,
+.entry-post-html {
+    font-size: 15px;
+    color: black!important;
+}
+
+body h3,
+.feature-box h3 {
+    font-size: 18px;
+    color: black!important;
+}
+
+.class-A .entry-title h3,
+.class-C .fbox-desc h3,
+#current-category .fbox-desc h3 {
+    font-size: 16px;
+}
+
+.class-D .fbox-desc h3,
+.class-B  .entry-title h3,
+#main_poster .entry-title h3,
+#main_poster .entry-title h5 {
+    font-size: 16px;
+}

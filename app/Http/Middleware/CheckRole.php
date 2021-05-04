@@ -17,7 +17,7 @@ class CheckRole
     public function handle($request, Closure $next, $roles)
     {
 
-        if (! $request->user()->hasRole($roles)) {
+        if ($request->user() &&  !$request->user()->hasRole($roles)) {
             // var_dump('chexav axper');die;
             Auth::logout();
             return redirect()->route('register', app()->getLocale());
@@ -26,10 +26,14 @@ class CheckRole
         }
 
         /* User-STATUS --- does he active or not */
-        if ( $request->user()->status !== 1) {
+        if ($request->user() && $request->user()->status !== 1) {
             Auth::logout();
             return redirect()->route('login', app()->getLocale())->with('blocked_msg', trans('auth.blocked')); // 'You are blocked flash-alert
         }
+        // else{
+        //     // կամ էլի login էջի վրա։ Սա արվելա, որ մի էջի վրա լօգաութից կամ էքփայերդից հետո մյուս էջերոմ Error չտա:
+        //     return redirect()->route('index_page', app()->getLocale());
+        // }
 
 
         return $next($request);

@@ -56,7 +56,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: rgb(175, 175, 175)
 }
 
 [tabindex="-1"]:focus {
@@ -572,6 +572,33 @@ pre code {
     padding-right: 15px;
     padding-left: 15px
 }
+.col-lg-5.mt-5-own.pad{
+	padding-left: 8px
+}
+.col-lg-6.pad{
+	    padding-left: 2px;
+    padding-right: 4px;
+}
+
+.col-lg-6.pad .feature-box.media-box {
+    /* padding: 4px; */
+    padding: 1px 0 0;
+}
+.col-lg-6.pad.col-last{
+	padding-left: 4px;
+	padding-right: 0;
+}
+
+.col-lg-6.pad.col-last .feature-box.media-box.own {
+    padding: 0;
+    margin: 4px 0px 5px 11px;
+}
+
+
+.nobottommargin.mar1{ margin: -4px -2px;}
+.nobottommargin.mar2{ margin: -4px 2px;}
+.nobottommargin.mar3{margin: 2px -2px;}
+.nobottommargin.mar4{margin: 2px 2px;}
 
 .col {
     -ms-flex-preferred-size: 0;
@@ -1990,11 +2017,11 @@ select.form-control:focus::-ms-value {
 }
 
 .col-form-label {
-    padding-top: calc(0.375rem + 1px);
-    padding-bottom: calc(0.375rem + 1px);
-    margin-bottom: 0;
+    /*padding-top: calc(0.375rem + 1px);
+    padding-bottom: calc(0.375rem + 1px);   
     font-size: inherit;
-    line-height: 1.5
+    line-height: 1.5*/
+	 margin-bottom: 0;
 }
 
 .col-form-label-lg {
@@ -2446,11 +2473,11 @@ textarea.form-control {
     text-decoration: none
 }
 
-.btn:focus, .btn.focus {
+/*.btn:focus, .btn.focus {
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25)
 }
-
+*/
 .btn.disabled, .btn:disabled {
     opacity: .65
 }
@@ -2494,7 +2521,8 @@ a.btn.disabled, fieldset:disabled a.btn {
 .btn-secondary {
     color: #fff;
     background-color: #6c757d;
-    border-color: #6c757d
+    border-color: #6c757d;
+    margin: 0 8px 0 0;
 }
 
 .btn-secondary:hover {
@@ -2539,10 +2567,10 @@ a.btn.disabled, fieldset:disabled a.btn {
     border-color: #1e7e34 */
 }
 
-.btn-success:focus, .btn-success.focus {
+/*.btn-success:focus, .btn-success.focus {
     box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5)
 }
-
+*/
 .btn-success.disabled, .btn-success:disabled {
     color: #fff;
     background-color: #28a745;
@@ -2551,13 +2579,13 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #1e7e34;
-    border-color: #1c7430
+    background-color: #0f1841;
+    border-color: #0f1841
 }
 
-.btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus, .show > .btn-success.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5)
-}
+/*.btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus, .show > .btn-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(15, 24, 65, 0.5)
+}*/
 
 .btn-info {
     color: #fff;
@@ -4500,7 +4528,9 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem
+    border-radius: .25rem;
+	min-height: 65vh;
+    margin-bottom: 8%;
 }
 
 .card > hr {
@@ -4780,6 +4810,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     color: #6c757d
 }
 
+
 .pagination {
     display: -ms-flexbox;
     display: flex;
@@ -4788,7 +4819,14 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     border-radius: .25rem;
     display:none
 }
+.pagination-own >ul.pagination{
+    display: -ms-flexbox!important;
+    display: flex!important;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
 
+}
 .page-link {
     position: relative;
     display: block;
@@ -5624,7 +5662,8 @@ button.close {
     appearance: none;
     position: relative;
     z-index: 120;
-    bottom: 12px;
+    bottom: 22px;
+    left: 17px;
 }
 
 a.close.disabled {
@@ -7943,7 +7982,8 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 }
 
 .shadow-lg {
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+    background-color:rgb(211, 221, 222);
 }
 
 .shadow-none {
@@ -8130,10 +8170,12 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
     margin: 3rem !important
 }
 
-.mt-5, .my-5 {
+.mt-5, .my-5{
     margin-top: 3rem !important
 }
-
+.mt-5-own {
+    margin-top: 0 !important
+}
 .mr-5, .mx-5 {
     margin-right: 3rem !important
 }
@@ -8243,7 +8285,7 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 }
 
 .pl-4, .px-4 {
-    padding-left: 1.5rem !important
+    padding-left: 1.3rem !important
 }
 
 .p-5 {

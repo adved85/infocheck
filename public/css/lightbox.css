@@ -1,0 +1,85 @@
+/*.gallery {
+  padding: 10px;
+  text-align: center;
+}
+.gallery img {
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  height: auto;
+  max-height: 300px;
+  margin: 10px;
+  cursor: pointer;
+}*/
+
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(34, 34, 34, 0.9);
+  z-index: 300;
+}
+.lightbox .flkty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 90vw;
+  max-height: 90vh;
+  padding: 20px 65px;
+  background: #222;
+}
+.lightbox .flkty .flickity-viewport {
+  min-height: 150px;
+  transition: height 300ms;
+}
+.lightbox .flkty .flickity-viewport img {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  max-width: 100%;
+  max-height: calc(90vh - 40px);
+  margin: 0 10px;
+}
+.lightbox .flkty .flickity-prev-next-button.close {
+    position: absolute;
+    top: 30px;
+    right: 8px;
+    z-index: 120;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #ffffffbf;
+    left: unset;
+    bottom: unset;
+
+}
+
+.lightbox .flkty .flickity-prev-next-button.close .cross {
+  stroke: #333;
+  stroke-width: 1.25;
+}
+
+@media screen and (max-width: 800px) {
+  .lightbox .flkty {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 90vh;
+  }
+  .lightbox .flkty .flickity-viewport {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: calc(100% - 130px);
+  }
+  .lightbox .flkty .flickity-viewport img {
+    max-height: calc(100vh - 40px);
+  }
+}

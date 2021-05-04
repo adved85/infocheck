@@ -22,9 +22,9 @@ class Event extends Model
 
 
         $events = [];
-        $data = Event::all();
-      //  return  $data;
-       $data = DB::table("events")->where('lang_id','=',$lng)->get();
+        // $data = Event::all();
+        //  return  $data;
+        $data = DB::table("events")->where('lang_id','=',$lng)->get();
 
 
         if($data->count()) {
@@ -59,7 +59,7 @@ class Event extends Model
     static function dateHasOtherEvents($date, $lang_id) {
         // '2018-11-10'
 
-        $ps = DB::table('posts')->select('id')->whereDate('date', $date)->where('lang_id', '=', $lang_id)->get();
+        $ps = DB::table('posts')->select('id')->whereDate('date', $date)->where('lang_id', '=', $lang_id)->where('status', '<>', 'unpublished')->get();
         if(count($ps) > 0) {
             // 'dont touch Event-date <br>';
             return true;

@@ -11,6 +11,9 @@ use App\Lang;
 use App\Comment;
 use Illuminate\Database\Eloquent\Builder;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 class CommentController extends Controller
 {
 
@@ -28,6 +31,8 @@ class CommentController extends Controller
 
 
     }
+
+    /* call from PostController */
     public function savecommentstatus(Request $request, $locale) {
         $reqAll = $request->all();
         // return $reqAll;
@@ -41,6 +46,10 @@ class CommentController extends Controller
 
         // return $updateComm;
         $commentID = $updateComm[0]['id'];
+
+        // logging action
+        Log::channel('info_daily')->info('Admin: Change Comment N-'.$commentID.' status from Post-relations.', ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
         return redirect()->back()->with(['success' => "Status of comment №$commentID was successfully changed."]);
     }
 
@@ -53,6 +62,11 @@ class CommentController extends Controller
         $comment->update([
             'approved' => $request->approved,
         ]);
+
+
+        // logging action
+        Log::channel('info_daily')->info('Admin: Change Comment N-'.$comment->id.' status='.$request->approved, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
         return redirect()->back()->with('success', 'Comment №-'. $comment->id .' was successfully updated');
     }
 }

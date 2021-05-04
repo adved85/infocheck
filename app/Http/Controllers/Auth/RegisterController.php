@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Role;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Session;
+
 class RegisterController extends Controller
 {
     /*
@@ -33,6 +38,7 @@ class RegisterController extends Controller
 
 
     public function redirectTo() {
+        Session::flash('subscribeResponse',['success' => __('register.regsuccess')]);
         return app()->getLocale() . '/';
     }
 
@@ -81,6 +87,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $user->roles()->attach(Role::where('name','i_user')->first());
+
+        // logging action
+        Log::channel('info_daily')->info('User: New User has registrated.', ['id'=> $user->id, 'email'=> $user->email]);
 
         return $user;
     }

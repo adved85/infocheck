@@ -12,6 +12,7 @@ use App\Event;
 class CurrentTagPosts extends Controller
 {
     public function index($locale,$tag_name){
+        $lng=Lang::where('status',1)->get();
         $lang_id=Lang::getLangId($locale);
         $category=Category::get_category($lang_id);
         $calendar= Event::event($locale);
@@ -26,7 +27,7 @@ class CurrentTagPosts extends Controller
         }
         else{
             $not_found = trans('text.error_page_text');
-
+  return view('errors.' . 'error');
         }
 
 // return count($all_Posts);
@@ -37,6 +38,7 @@ class CurrentTagPosts extends Controller
             'most_viewed'=>$most_viewed,
             "event"=> $calendar,
             'call'=>'tags',
+            'lng'=>$lng,
             'tag_name'=>$tag_name,
             'not_found'=>$not_found
 

@@ -13,7 +13,9 @@ return [
 
     'Register' => 'Register',
     'Name' => 'Name',
-    'E-Mail Address' => 'E-Mail Address',
+    'E-Mail Address' => 'E-Mail address',
     'Password' => 'Password',
-    'Confirm Password' => 'Confirm Password',
+    'Confirm Password' => 'Confirm password',
+
+    'regsuccess' => 'You have successfully registered. For asking the question you have to verify your email address.',
 ];

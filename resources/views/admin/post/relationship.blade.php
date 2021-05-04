@@ -186,7 +186,7 @@
                                 <form action="{{route('admin.question.reset',['locale' => app()->getLocale(), $item])}}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-danger"
-                                    onclick="return confirm('Do you really want to reset this Post from Question №-{{$item->id}}')?true:false">Rest From Question</button>
+                                    onclick="return confirm('Do you really want to reset this Post from Question №-{{$item->id}}')?true:false">Reset From Question</button>
                                 </form>
                             </td>
                         </tr>
@@ -202,6 +202,64 @@
                 </tbody>
             </table>
         </div>
+        @endisset
+
+
+        @isset($picObject)
+        {{-- @dump($picObject) --}}
+            <hr class="mt-5">
+            <form action="{{ route('admin.document.savepicstatus', app()->getLocale() )}}" method="POST">
+                    @csrf
+
+                    <div class="table-responsive-md">
+                        <h4>Attached Pictures (LightBox)</h4>
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <th>Id</th>
+                                <th>Unique Id of Post</th>
+                                <th>Link</th>
+                                <th>Picture</th>
+                                <th>Show in LightBox</th>
+                            </thead>
+                            <tbody>
+                                @forelse ($picObject as $pic)
+                                <tr>
+                                    <th scope="row" style="vertical-align: middle">{{$pic->id}}</th>
+                                    <td style="vertical-align: middle">{{$post->unique_id}}</td>
+                                    <td style="vertical-align: middle">{{ $pic->pic_link}}</td>
+                                    <td><img src="{{$pic->pic_link}}" alt="{{$pic->pic_link}}" width="120px"></td>
+                                    <td style="vertical-align: middle">
+                                        <input type="checkbox" name="pBox[{{$pic->id}}]" onchange="getStatusChangeValue(event)"
+                                            @if ($pic->isused)
+                                                checked
+                                            @endif
+                                        style="width:20px;height:20px">
+                                        <input type="text" id="pBox[{{$pic->id}}]" name="pics[{{$pic->id}}]" value="{{$pic->isused}}"  hidden>
+                                    </td>
+                                </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="alert alert-info mt-3">
+                                                No Attached pictures.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            @if($post->pictures()->exists())
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <button type="submit" class="btn btn-outline-success px-5">Save</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            @endif
+
+                        </table>
+                    </div>
+                </form>
         @endisset
 
     </div><!-- card body -->

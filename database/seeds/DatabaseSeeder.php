@@ -33,5 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostersTableSeeder::class);
 
         $this->call(PostLayoutTableSeeder::class);
+
+        $this->call(AboutCompanyTableSeeder::class);
     }
 }

@@ -1,9 +1,11 @@
 nav.greedy {
-  position: relative;
-  /* height: 60px; */ /* AA_no_need */
-  display: flex;
-  align-items: center;
-  /* background: #f2f2f2; */ /* AA_no_need */
+    position: relative;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    /* background: #f2f2f2; */
+    /* padding-top: 6px; */
+    left: -83px; /*63px*/
 }
 
 nav.greedy h1, nav.greedy #logo {
@@ -22,20 +24,22 @@ nav.greedy h1, nav.greedy #logo {
   border-right: none;
 }
 
-nav.greedy button {
+nav.greedy button.own {
   align-self: stretch;
   transition: all .4s ease-out;
   padding: 0 1.5rem 0 1.5rem; /* AA_default was-> padding: 0 1rem 0 1.5rem; we need to centering */
   outline: 0;
   border: 0;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
   font-weight: bold;
   background:none;  /* AA_no_need */
   color: #404040;
-  
+
   /* AA_button into lists-space */
+  font-size: 1.3rem;
   position: relative;
-  right: 3rem;
+  /* right: 3rem; */
+  top: -0.4rem;
 }
 
 nav.greedy button.hidden {
@@ -64,33 +68,52 @@ nav.greedy button.hidden {
 } */
 
 ul.links {
-  display: flex;
-  justify-content: flex-end;
-  flex: 1;
-  overflow: hidden;
-  margin: unset; /* AA_for vlign */
-  margin-right: 3rem; /* AA_place for button */
-  text-transform: capitalize;
-  font-weight: 700;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    overflow: hidden;
+    /* margin-right: 3rem; */
+    /* text-transform: capitalize; */
+    font-weight: 700;
+    height: 100%;
+
 }
 
 ul.links li {
-  flex: none;
-  padding: 1rem;
-  list-style: none; /* AA_remove dots*/
+    flex: none;
+    padding: 0;
+    list-style: none;
+    border-right: thin solid  rgba(204, 214, 215, 0.11);
+
 }
 
+/* ul.links li::before {
+    content:'';
+    padding: 5px;
+
+  } */
 ul.links li a {
-  color: #404040;
-}
+    color: #d5dedf;
+    display: block;
+    line-height: 22px;
+    padding: 20px 22px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    -webkit-transition: margin .4s ease,padding .4s ease;
+    -o-transition: margin .4s ease,padding .4s ease;
+    transition: margin .4s ease,padding .4s ease;
 
-ul.links li a:hover, ul.hidden-links li a:hover{
-    color: #8e9ed4;
 }
+/*
+ul.links li a:hover, ul.hidden-links li a:hover{
+     color: #8e9ed4;
+}
+*/
 
 ul.hidden-links {
   position: absolute;
-  background: #ffffff;
+  background: #0f1841;
   right: 0;
   top: 100%;
     text-transform: capitalize;
@@ -98,8 +121,18 @@ ul.hidden-links {
 }
 
 ul.hidden-links li a {
-  color: #404040;
-  padding-right: 1rem;
+    color: #d5dedf;
+    display: block;
+    line-height: 22px;
+    padding: 20px 22px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    -webkit-transition: margin .4s ease,padding .4s ease;
+    -o-transition: margin .4s ease,padding .4s ease;
+    transition: margin .4s ease,padding .4s ease;
+
+
 }
 
 ul.hidden-links.hidden {
@@ -107,14 +140,21 @@ ul.hidden-links.hidden {
 }
 
 ul.hidden-links li {
-  padding: 1rem;
+  padding: 0;
   list-style: none;
 }
+/*
+ul.links li:hover  {
+     background-color: #2a365e;
 
+}
+ul.links li:hover > a{
+    color: #8e9ed4;
+}
 /*
 -- Demo Styles
 */
-/* 
+/*
 * {
   box-sizing: border-box;
 }
@@ -146,3 +186,8 @@ html {
   height: 100%;
   font-family: Helvetica, sans-serif;
 } */
+@media (min-width: 1362px) {
+    ul.hidden-links {
+        right: -30px;
+    }
+}

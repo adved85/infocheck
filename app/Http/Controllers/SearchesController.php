@@ -23,7 +23,7 @@ class SearchesController extends Controller
 
         Session::put('search', $s);
         Session::put('locale',$locale);
-
+        $lng=Lang::where('status',1)->get();
             $lang_id=Lang::getLangId($locale);
             $calendar= Event::event($locale);
             $category=Category::get_category($lang_id);
@@ -36,7 +36,7 @@ class SearchesController extends Controller
      ->where('p.title', 'like', "%$s%")
     ->orWhere('p.html_code', 'like', "%$s%")
     ->join('langs as l','p.lang_id','=','l.id')
-    ->paginate(3);
+    ->paginate(10);
 
    // return $posts;
             $data = array(
@@ -46,7 +46,8 @@ class SearchesController extends Controller
                 'post'=>$posts,
                 'most_viewed'=>$most_viewed,
                 'call'=>'search',
-                's' => $s
+                's' => $s,
+                'lng'=>$lng
 
 
                 );

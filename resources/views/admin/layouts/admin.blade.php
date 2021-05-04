@@ -123,8 +123,12 @@
                 <a href="{{ route('admin.answer.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="answers">Answers</a>
                 <a href="{{ route('admin.category.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="categories">Categories</a>
                 <a href="{{ route('admin.post.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="posts">Posts</a>
-                <a href="{{route('admin.comment.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="comments">Commencts</a>
+                <a href="{{route('admin.comment.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="comments">Comments</a>
                 <a href="{{route('admin.user.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="users">Users</a>
+                <a href="{{route('admin.subscribe.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="subscribers">Subscribers</a>
+                <a href="{{route('admin.about.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="about_us">About Us</a>
+                <a href="{{route('admin.lang.index', app()->getLocale()) }}" class="list-group-item list-group-item-action bg-light" id="languages">Languages</a>
+
             </div>
         </div>
         <!-- /#sidebar-wrapper End -->
@@ -144,7 +148,18 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Comments
+                                    {{ App\Comment::where('approved',0)->count() }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Questions
+                                    {{ App\Question::where('visible',0)->count() }}
+                                </a>
+                            </li> --}}
                         </ul>
 
                         <!-- Right Side Of Navbar -->
@@ -386,11 +401,16 @@
         jQuery(document).ready(function() {
             let short_text = document.getElementById('short_text');
             let html_code = document.getElementById('html_code');
+            let email_body = document.getElementById('email_body');
             if (short_text !== null) {
                 CKEDITOR.replace('short_text', { height: 150 });
             }
             if (html_code !== null) {
                 CKEDITOR.replace('html_code', { height: 150 });
+            }
+
+            if (email_body !== null) {
+                CKEDITOR.replace('email_body', { height: 150 });
             }
         })
 

@@ -61,6 +61,15 @@ return [
     ],
 
     /*
+    | my addition
+    | get from Documentation
+    */
+    'reply_to' => [
+        'address' => env('MAIL_FROM_ADDRESS'),
+        'name' => env('MAIL_FROM_NAME'),
+    ],
+
+    /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
     |--------------------------------------------------------------------------

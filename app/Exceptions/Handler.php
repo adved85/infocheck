@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -46,6 +47,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+
+        if ($this->isHttpException($exception)) {
+
+            if ($exception->getStatusCode() == 404) {
+                return redirect(app()->getLocale());
+            }
+        }
+
+
         return parent::render($request, $exception);
     }
+
+
+
 }

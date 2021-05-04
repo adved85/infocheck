@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
+use App\User;
+
+use App\Subscriber;
+
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+
+
 class PostController extends Controller
 {
 
@@ -183,7 +195,7 @@ class PostController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
 
         $post_exists = Post::where('unique_id',$request->unique_id)->where('lang_id',$request->lang_id)->first();
@@ -200,9 +212,10 @@ class PostController extends Controller
         $lng_name = $language[0]['lng_name'];
 
 
-        // return redirect()->back()->with('success', 'New Post pi-'.$post_id.' ui-'.$unique_id.' was created successfuly');
+        //// return redirect()->back()->with('success', 'New Post pi-'.$post_id.' ui-'.$unique_id.' was created successfuly');
 
-        // store tags into taggable_tags
+        //// store tags into taggable_tags
+
         if ($request->input('tags')) {
             if(!empty($request->input('tags'))) {
 
@@ -220,17 +233,18 @@ class PostController extends Controller
         }
 
 
-        // update lang_id into taggable_taggables
+        //// update lang_id into taggable_taggables
         DB::connection('mysql_admin')->table('taggable_taggables')
         ->where('taggable_type', 'App\\Post')
         ->where('taggable_id', $post_id)
         ->update(['lang_id' => $request->input('lang_id') ]);
 
 
-        // save as event to show into Calendar
+        //// save as event to show into Calendar
         Event::checkAndSaveIfNotExists($request->input('date'), $request->input('lang_id'));
 
-        // check and replace other posts with status = "main"
+        //// check and replace other posts with status = "main"
+
         if($post->status == 'main') {
             $mainPosts = Post::where('status','=', 'main')->where('lang_id','=',$post->lang_id)->get();
             // return $mainPosts;
@@ -243,16 +257,75 @@ class PostController extends Controller
             }
         }
 
-        // Has Answer
+        ///// fill questionable-table with all subscribers-data
+        // $subscribers = Subscriber::all();
+        // foreach ($subscribers as $key => $value) {
+        //     DB::connection('mysql_admin')->table('subscribable')->insert(['post_id' => $post_id, 'subscriber_id'=> $value->id]);
+        // }
+
+
+
+        //// Has Question
         if ($request->input('q_id')) {
             $question = Question::on('mysql_admin')->find($request->input('q_id'));
             $question->questionable_id = $post_id;
             $question->questionable_type = Post::class;
             $question->link = 'posts/'.$unique_id.'/'.urlencode($post->title); // 'localhost::8000/'.$language[0]['lng'].'/posts/'
             $question->save();
+
+
+            $user = User::find($question->user_id);
+            $params = [];
+            $params['from_name'] = config('mail.from.name');
+            $params['from_email'] = config('mail.from.address');
+            $params['name'] = $user->name;
+            $params['email'] = $user->email;
+            $params['subject'] = 'A reply to Your Question';
+            $params['template_type'] = 'post_reply';
+            $params['template'] = 'admin.emails.send';
+
+            $body = '<h4>Dear '.$user->name.'!</h4>';
+            $body.='<p>We replied to your question.</p>';
+            $body.='<p><cite>"'.$question->body.'"</cite></p><hr>';
+            $body.='<p>Follow this link to see Your answer.</p>';
+            $body.='<a href="'.config('app.url').'/'.$locale.'/posts/'.$request->unique_id.'/'.urlencode($request->title).'" target="_blank">'.$request->title.'</a>';
+
+            $params['body'] = $body;
+            // return $params;
+
+
+            // return new MailNotify($params); // shows template //
+            Mail::to($user->email)->send(new MailNotify($params));
+
+
+/*
+            Mail::send('admin.emails.send',
+            array(
+               'name' => 'admin',
+               'email' => 'icheck.am@gmail.com',
+               'body' => $body
+            ), function($body)
+           {
+            $body->from('icheck.am@gmail.com');
+            $body->to(User::find(11)->email, User::find(11)->name)
+            ->subject('A reply to Your Question');
+            });
+            if (Mail::failures()) {
+                return redirect()->back()->with('oneerror', 'Mail was not sent');
+            }else{
+                return redirect()->back()->with('success', 'Mail was successfully sent');
+            }
+*/
+
+            // logging action - Post replied Question
+            Log::channel('info_daily')->info('Admin: Store Post N-'.$post_id.', Question №-'.$question->id.'replied too.', ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
             return redirect()->route('admin.post.index', $language[0]['lng'])
             ->with('success', 'Post №-'.$post_id.' in '.$lng_name.' was successfuly created!<br> Question №-'.$question->id.'replied too.');
         }
+
+        // logging action - new Post
+        Log::channel('info_daily')->info('Admin: Store Post N-'.$post_id, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
 
         // return redirect()->back()->with('success', 'Post №-'.$post_id.' in '.$lng_name.' was successfuly created!');
         return redirect()->route('admin.post.index', $language[0]['lng'])
@@ -260,6 +333,7 @@ class PostController extends Controller
 
 
     }
+
 
     /**
      * Display the specified resource.
@@ -300,6 +374,10 @@ class PostController extends Controller
             $imageurls[$i]['url'] = Storage::url($images[$i]);
             $imageurls[$i]['size'] = $size = Storage::size($images[$i]);
         }
+
+
+        // logging action - new Post
+        Log::channel('info_daily')->info('Admin: Edit Post N-'.$id, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
 
 
         return view('admin.post.edit', [
@@ -343,9 +421,28 @@ class PostController extends Controller
 
         }
 
+        // dd($post->pictures()->get());
+
+
+        $images = Storage::files('public/'.$this->folder_name.'/'.$post->unique_id); // this are images //
+        $imageurls = [];
+        for ($i=0; $i < count($images) ; $i++) {
+            $imageurls[$i]['url'] = Storage::url($images[$i]);
+            $imageurls[$i]['size'] = $size = Storage::size($images[$i]);
+            if(in_array(Document::getTypeFromLink($images[$i]), $this->validImageExp)) {
+
+                if(!DB::table('lightboxes')->where('pic_link',  Storage::url($images[$i]) )->exists()) {
+                    $post->pictures()->create(['post_unique_id' => $unique_id, 'pic_link'=> Storage::url($images[$i])]);
+                }
+
+            }
+        }
+
+
         $comments = $post->getComments()->with('user')->get();
         $docsObject = $post->getDocuments()->get(); // պետք է լինի բազա խփելուց [ցիկլից] հետո
         $question = $post->questions()->with('user')->get();
+        $picObject = $post->pictures()->get();
         // dd($question);
         return view('admin.post.relationship',[
             'page_name' => 'posts',
@@ -355,6 +452,7 @@ class PostController extends Controller
             'comments' => $comments,
             'docsObject' => $docsObject,
             'question' => $question,
+            'picObject' => $picObject,
         ]);
     }
 
@@ -439,6 +537,10 @@ class PostController extends Controller
         }
 
 
+        // logging action ( can store in 3 lang on the same time)
+        Log::channel('info_daily')->info('Admin: Update Post N-'.$post->id, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
+
+
         return redirect()->back()->with('success', 'Post №-'.$post->id.' in '.$lng_name.' was successfuly updated!');
 
 
@@ -479,6 +581,9 @@ class PostController extends Controller
             $post->detag();
             $post->delete();
             Event::checkAndDeleteEventDate($date, $lang_id); // check
+
+            // logging action ( can store in 3 lang on the same time)
+            Log::channel('info_daily')->info('Admin: Delete Post N-'.$id, ['id'=> Auth::user()->id, 'email'=> Auth::user()->email]);
 
             return redirect()->back()->with('success', 'Post №-' . $id. ' was succesfuly deleted');
         }

@@ -98,7 +98,7 @@
             <div class="form-group row">
                 <label for="create-post-titile" class="col-sm-2 col-form-label col-form-label-lg text-left">Title</label>
                 <div class="col-sm-10">
-                    <input type="text" name="title" id="create-post-titile" class="form-control new-post" placeholder="Post title">
+                    <input type="text" name="title" id="create-post-titile" class="form-control new-post" placeholder="Post title" value="{{ old('title') }}">
                 </div>
             </div>
 
@@ -106,6 +106,7 @@
                 <label for="short_text" class="col-sm-2 col-form-label col-form-label-lg text-left">Short text</label>
                 <div class="col-sm-10">
                     <textarea type="text" name="short_text" id="short_text" class="form-control new-post" rows="5">
+                        {{ old('short_text') }}
                     </textarea>
                 </div>
             </div>
@@ -114,6 +115,7 @@
                 <label for="html_code" class="col-sm-2 col-form-label col-form-label-lg text-left">HTML code</label>
                 <div class="col-sm-10">
                     <textarea type="text" name="html_code" id="html_code" class="form-control new-post" rows="5">
+                        {{ old('short_text') }}
                     </textarea>
                 </div>
             </div>
@@ -128,14 +130,14 @@
             <div class="form-group row">
                 <label for="create-post-meta-k" class="col-sm-2 col-form-label col-form-label-lg text-left">Meta-keys</label>
                 <div class="col-sm-10">
-                    <input type="text" name="meta_k" id="create-post-meta-k" class="form-control new-post" placeholder="this,post,about,....">
+                    <input type="text" name="meta_k" id="create-post-meta-k" class="form-control new-post" placeholder="this,post,about,...." value="{{ old('meta_k') }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="create-post-meta-d" class="col-sm-2 col-form-label col-form-label-lg text-left">Meta-description</label>
                 <div class="col-sm-10">
-                    <input type="text" name="meta_d" id="create-post-meta-d" class="form-control new-post" placeholder="this post about ....">
+                    <input type="text" name="meta_d" id="create-post-meta-d" class="form-control new-post" placeholder="this post about ...." value="{{ old('meta_d') }}">
                 </div>
             </div>
 
@@ -165,7 +167,7 @@
             <div class="form-group row">
                 <label for="create-post-date" class="col-sm-2 col-form-label col-form-label-lg text-left">Tags</label>
                 <div class="col-sm-10">
-                    <input type="text" name="tags" value="" id="tags" placeholder='Select or Add tags'>
+                    <input type="text" name="tags" value="{{ old('tags') }}" id="tags" placeholder='Select or Add tags'>
                 </div>
             </div>
 

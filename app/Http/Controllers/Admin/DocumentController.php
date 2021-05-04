@@ -9,6 +9,8 @@ use App\Document;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
+use App\Lightbox;
+
 class DocumentController extends Controller
 {
     public function uploadimage(Request $request, $locale) {
@@ -82,5 +84,16 @@ class DocumentController extends Controller
         }
         // return $updateDocs;
         return redirect()->back()->with(['docStatusMessage' => 'All changes successfully saved.']);
+    }
+
+    public function savepicstatus(Request $request, $locale) {
+        $pics = $request->all()['pics'];
+        $updatePics = [];
+        foreach ($pics as $key => $value) {
+            $updatePics[] =['id' => $key, 'isused' => $value];
+            Lightbox::on('mysql_admin')->find($key)->update(['isused' => $value]);
+        }
+        // return $updateDocs;
+        return redirect()->back()->with(['docStatusMessage' => 'All changes for LightBox successfully saved.']);
     }
 }

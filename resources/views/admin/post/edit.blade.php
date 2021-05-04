@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="form-group row">
-                        <label for="edit-post-title" class="col-sm-2 col-form-label col-form-label-lg text-left">Unique</label>
+                        <label for="edit-post-title" class="col-sm-2 col-form-label col-form-label-lg text-left">Title</label>
                         <div class="col-sm-10">
                             <input type="text" name="title" id="edit-post-title" class="form-control" value="{{$post->title}}">
                         </div>
@@ -177,7 +177,7 @@
                 <div class="form-group row">
                     <label for="edit-post-date" class="col-sm-2 col-form-label col-form-label-lg text-left">Date</label>
                     <div class="col-sm-10">
-                        <input type="date" name="date" id="edit-post-date" class="form-control" value="{{$post->date}}">
+                        <input type="date" name="date" id="edit-post-date" class="form-control" value="{{ date('Y-m-d', strtotime($post->date)) }}">
                     </div>
                 </div>
 

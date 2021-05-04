@@ -19,5 +19,16 @@ return [
     'If you did not receive the email' => 'If you did not receive the email',
     'click here to request another' => 'click here to request another',
 
+    // for subscription
+    'is already verified' => 'Your email address already verified!',
+    'Verify Your Email Address For Subscription' => 'Verify Your Email Address For Subscription.',
 
+    'Your Email Address For Subscription Successfully Was Activated' => 'Your Email Address For Subscription Successfully Activated',
+    'Your Token For Subscription Was Expired' => 'Your Token For Subscription Was Expired',
+    'You have successfully unsubscribed' => 'Your subscription is successfully ended.',
+
+    'To unsubscribe click on the button below' => 'To unsubscribe click on the button below.',
+    'unsubscribe_btn' => 'Unsubscribe',
+
+    'please enter valid email' => 'Please, enter valid email address.',
 ];

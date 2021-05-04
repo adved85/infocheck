@@ -86,6 +86,14 @@ return [
         'am' => 'Armenian',
         'en' => 'English',
         'ru' => 'Russian',
+        'kz'=>'kazaxstan',
+    ],
+
+    'locale_trans' => [
+        'am' => 'ՀԱՅ',
+        'en' => 'ENG',
+        'ru' => 'РУС',
+        'kz'=>'kaz',
     ],
 
     /*

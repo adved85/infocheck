@@ -110,6 +110,33 @@
                                         @csrf
                                         {{ method_field('DELETE') }}
                                     <div class="btn-group" role="group" aria-label="Basic example">
+                                        <!-- translate button START -->
+                                        @if (app\Category::where('item_id', $item->item_id)->count() !== count($langs))
+
+                                        <div class="btn-group" role="group">
+                                            <button id="btnGroupTrans" type="button" class="btn btn-outline-primary px-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-globe"></i>
+                                            </button>
+                                            <div class="dropdown-menu py-0" aria-labelledby="btnGroupTrans">
+                                            <div class="list-group shadow-lg">
+                                                @foreach ($langs as $lezu)
+
+                                                    @if (!app\Category::where('item_id', $item->item_id)->where('lang_id', $lezu->id)->first())
+                                                        <a href="{{route('admin.category.translate',['locale' =>$lezu->lng,'id'=>$item->id])}}" class="text-center py-1" target="_blank">
+                                                            {{$lezu->lng_name}}
+                                                        </a>
+                                                    @endif
+
+                                                @endforeach
+                                            </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        <!-- translate button END -->
+
+
+
+
                                         <a role="button" class="btn btn-primary" id="cat-edit" href="{{route('admin.category.edit',['locale' => app()->getLocale(),$item])}}" target="_blank">Edit</a>
                                         <button role="button" type="submit" class="btn btn-danger" id="cat-delete">Delete</button>
                                     </div>
